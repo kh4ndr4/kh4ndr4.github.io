@@ -21,7 +21,7 @@ title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "kh4ndr4's blog"
 description              : "Blog de ciberseguridad."
-url                      : "https://github.com/kh4ndr4"
+url                      : "https://kh4ndr4.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "kh4ndr4/kh4ndr4.github.io"
 teaser                   : #"/assets/images/favicon-96x96.png"
