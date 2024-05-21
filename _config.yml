@@ -24,8 +24,8 @@ description              : "Blog de ciberseguridad."
 url                      : "https://github.com/kh4ndr4"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "kh4ndr4/kh4ndr4.github.io"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+teaser                   : #"/assets/images/favicon-96x96.png"
+logo                     : #"/assets/images/favicon-96x96.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -113,8 +113,8 @@ analytics:
 # Site Author
 author:
   name             : "kh4ndr4"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Apasionado de la **ciberseguridad**."
+  avatar           : "/assets/images/pinguino.jpg"
+  bio              : "👋 W3lc0m3! Soy kh4ndr4 y este es mi blog de ciberseguridad. Publico writeups de CTFs y posts sobre temas relacionados con la seguridad informática 💻 🔐."
   location         :
   email            :
   links:
@@ -125,8 +125,11 @@ author:
       icon: "fab fa-fw fa-linkedin" 
       url: "https://www.linkedin.com/in/miguelgonzalezgarciadev"  
     - label: "HackTheBox"
-      icon: "fa fa-fw fa-flag" 
-      url: "https://app.hackthebox.com/users/1924352"    
+      icon: "fas fa-fw fa-cube" 
+      url: "https://app.hackthebox.com/users/1924352"
+    #- label: "CTF Time"
+      #icon: "fa fa-fw fa-flag" 
+      #url: ""      
 
 # Site Footer
 footer:
@@ -138,8 +141,11 @@ footer:
       icon: "fab fa-fw fa-linkedin" 
       url: "https://www.linkedin.com/in/miguelgonzalezgarciadev"
     - label: "HTB"
-      icon: "fa fa-fw fa-flag" 
-      url: "https://app.hackthebox.com/users/1924352"    
+      icon: "fas fa-fw fa-cube" 
+      url: "https://app.hackthebox.com/users/1924352"
+    #- label: "CTF Time"
+      #icon: "fa fa-fw fa-flag" 
+      #url: ""       
 
 
 # Reading Files

@@ -2,7 +2,7 @@ main:
   - title: "Inicio"
     url: "/"
   - title: "Sobre mí"
-    url: "/"
+    url: "/about/"
   - title: "Blog"
     url: "/blog/"
   - title: "CTFs"
