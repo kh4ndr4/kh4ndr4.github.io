@@ -12,7 +12,7 @@ La máquina **Perfection** se encuentra en la plataforma [HackTheBox](https://ww
 
 ## Reconocimiento
 
-Comienzo verificando que la máquina se encuentra activa lanzándole un ping. Recibiendo una respuesta se que la máquina se encuentra activa. Tambien puedo saber que estoy ante un sistema Linux ya que tiene 63 de TTL.
+Comienzo verificando que la máquina se encuentra activa lanzándole un ping. Recibiendo una respuesta sé que la máquina se encuentra activa. También puedo saber que estoy ante un sistema Linux, ya que tiene 63 de TTL.
 
 ```shell
 ping -c 1 10.10.11.253   
@@ -29,7 +29,7 @@ El siguiente paso es hacer un escaneo nmap para descubrir que puertos de la máq
 
 - -p-: Escanear todos los puertos (65535).
 - –open: Mostrar solo los puertos abiertos.
-- -sS: Realiza un TCP SYN Scan para escanear rápidamente que puertos están abiertos.
+- -sS: Realiza un TCP SYN Scan para escanear rápidamente qué puertos están abiertos.
 - –min-rate 5000: Indica que el escaneo no vaya más lento que 5000 paquetes por segundo.
 - -vvv: El modo verbose muestra la información según se va encontrando.
 - -n: No realizar resolución de DNS. Así evitamos que el escaneo dure más tiempo del necesario.
@@ -68,7 +68,7 @@ A continuación, lanzo otro nmap para analizar los servicios y versiones de los 
 
 - -sCV: Detectar el servicio y aplicar scripts básicos de reconocimiento.
 - -p: Indicar los puertos a escanear.
-- -oN: Expotar el resultado a un archivo.
+- -oN: Exportar el resultado a un archivo.
 
 ```shell
 nmap -sCV -p22,80 10.10.11.253 -oN target                                                                                               
@@ -89,7 +89,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 8.51 seconds
 ```
 
-El escaneo no ha reportado nada interesante. Segun el titulo, la web parece ser una calculadora de notas. Antes de acceder a ella, la analizo con whatweb para ver mas información sobre las tecnologías que utiliza. 
+El escaneo no ha reportado nada interesante. Según el título, la web parece ser una calculadora de notas. Antes de acceder a ella, la analizo con whatweb para ver más información sobre las tecnologías que utiliza. 
 
 ```shell
 whatweb http://10.10.11.253                                         
@@ -97,7 +97,7 @@ whatweb http://10.10.11.253
 http://10.10.11.253 [200 OK] Country[RESERVED][ZZ], HTTPServer[nginx, WEBrick/1.7.0 (Ruby/3.0.2/2021-07-07)], IP[10.10.11.253], PoweredBy[WEBrick], Ruby[3.0.2], Script, Title[Weighted Grade Calculator], UncommonHeaders[x-content-type-options], X-Frame-Options[SAMEORIGIN], X-XSS-Protection[1; mode=block]
 ```
 
-Tambien realizare un fuzzing con gobuster para enumerar directorios y archivos. Utilizo los parámetros:
+También realizaré un fuzzing con gobuster para enumerar directorios y archivos. Utilizo los parámetros:
 
 - -w: Para indicar un diccionario.
 - -t 20: Emplear 20 hilos.
@@ -147,7 +147,7 @@ Entro a la web y veo una sección con una tabla para introducir calificaciones.
 
 ![Perfection 1](/assets/images/2024-05-18-Perfection/perfection_2.png)
 
-Al tratar de inyectar comandos o XSS, la pagina muestra un mensaje de aviso.
+Al tratar de inyectar comandos o XSS, la página muestra un mensaje de aviso.
 
 ![Perfection 2](/assets/images/2024-05-18-Perfection/perfection_1.png)
 
@@ -198,7 +198,7 @@ susan@perfection:~/ruby_app$
 
 ## Escalada de privilegios
 
-Para tener una consola interactiva  y que por ejemplo detecte un ctrl.c hay que hacer un tratamiento de la tty. Ejecuto `script /dev/null -c bash`, hago ***ctrl+z***, , escribo ***"stty raw -echo; fg"***, introduzco ***"reset xterm"*** y doy un ***intro***. Con esto he reiniciado la configuración de la terminal.
+Para tener una consola interactiva y que por ejemplo detecte un ctrl.c hay que hacer un tratamiento de la tty. Ejecuto `script /dev/null -c bash`, hago ***ctrl+z***, , escribo ***"stty raw -echo; fg"***, introduzco ***"reset xterm"*** y doy un ***intro***. Con esto he reiniciado la configuración de la terminal.
 
 La shell todavía no es interactiva del todo. Podemos ver que la variable de entorno $TERM tiene el valor dump y no xterm. Podemos arreglar esto de la siguiente forma. 
 
@@ -215,7 +215,7 @@ susan@perfection:~/ruby_app$ stty size
 24 80
 ```
 
-En la maquina Perfection hay 24 filas y 80 columnas, pero en mi kali son 63 filas y 281 columnas. Las modifico para que tengan el mismo espacio.
+En la máquina Perfection hay 24 filas y 80 columnas, pero en mi kali son 63 filas y 281 columnas. Las modifico para que tengan el mismo espacio.
 
 ```shell
 susan@perfection:~/ruby_app$ stty rows 63 columns 281
@@ -244,7 +244,7 @@ cat user.txt
 susan@perfection:~$
 ```
 
-En la carpeta "Migration" hay una base de datos con contraseñas pero se encuentran hasheadas.
+En la carpeta "Migration" hay una base de datos con contraseñas, pero se encuentran hasheadas.
 
 ```shell
 susan@perfection:~/Migration$ ls                               
@@ -279,7 +279,7 @@ Encuentra un archivo llamado "susan" que puedo leer.
 -rw-r----- 1 root susan 33 Apr 26 15:16 /home/susan/user.txt
 ```
 
-En su contenido, se indica en base a que reglas esta creada la contraseña del usuario susan. 
+En su contenido, se indica en base a que reglas está creada la contraseña del usuario susan. 
 
 ```shell
 susan@perfection:~$ cat /var/mail/susan      
@@ -302,7 +302,7 @@ Antes encontré la contraseña de sussan hasheada en una base de datos. La guard
 cat hash abeb6f8eb5722b8ca3b45f6f72a0cf17c7028d62a15a30199347d9d74f39023f
 ```
 
-Para romperla, usare hashcat.
+Para romperla, usaré hashcat.
 
 ```shell
 hashcat -m 1400 hash -a 3 "susan_nasus_?d?d?d?d?d?d?d?d?d"
@@ -333,7 +333,7 @@ Candidates.#1....: susan_nasus_126824210 -> susan_nasus_803824210
 Hardware.Mon.#1..: Util: 33%
 ```
 
-Como ya vi antes, el usuario se encuentra dentro del grupo sudo, por lo que  puedo ejecutar `sudo su` para ser root. 
+Como ya vi antes, el usuario se encuentra dentro del grupo sudo, por lo que puedo ejecutar `sudo su` para ser root. 
 
 ```shell
 susan@perfection:~$ sudo su
