@@ -205,7 +205,7 @@ La shell todavía no es interactiva del todo. Podemos ver que la variable de ent
 ```shell
 susan@perfection:~/ruby_app$ echo $TERM
 dumb
-susan@perfection:~/ruby_app$ export $TERM=xterm
+susan@perfection:~/ruby_app$ export TERM=xterm
 ```
 
 La proporción de la consola no es correcta comparada con la terminal de mi kali. Miro el tamaño con `stty size`.

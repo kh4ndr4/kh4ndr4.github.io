@@ -346,7 +346,7 @@ La shell todavía no es interactiva del todo. Podemos ver que la variable de ent
 ```shell
 www-data@2million:~/html$ echo $TERM
 dumb
-www-data@2million:~/html$ export $TERM=xterm
+www-data@2million:~/html$ export TERM=xterm
 ```
 
 La proporción de la consola no es igual a la de terminal. Miro el tamaño con `stty size`.
